@@ -1,5 +1,6 @@
 """."""
 import random
+import prettify
 
 curr_students = ['Stephen Koch',
                  'Anastasia Lebedeva',
@@ -46,7 +47,8 @@ class PairGenerator:
         random.shuffle(t)
         it = iter(t)
         thing = zip(*[it] * size)
-        return [i for i in thing]
+        pairs = [i for i in thing]
+        return pairs
 
     def create(self):
         """Start the input process to choose which function to use."""
@@ -68,7 +70,7 @@ class PairGenerator:
                 shuffled = "".join(pairs)
                 random.shuffle(shuffled)
                 pairs(shuffled)
-        print(pairs)
+        print(prettify.make_pretty(pairs))
 
 
 PairGenerator()
