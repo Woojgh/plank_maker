@@ -60,16 +60,22 @@ class PairGenerator:
 
     def create(self, student_list):
         """Start the input process to choose which function to use."""
-        length = len(student_list)
-        print(length)
-        # user_input = input('Option 1: Pairs with fillin or 2: Regular pairs?')
-        # if user_input == '1':
+        students_absent = input('Enter student name if abesnt, seperate with comma: ')
+        absent_list = students_absent.split(',')
+        if students_absent == '':
+            pairs = self.pair_em(student_list)
+            pass
+        else:
+            pairs = self.pair_em(student_list, absent_list)
+
+        self.recent_check(pairs)
+
+    def pair_em(self, students_list, absent_list=[]):
+        length = len(students_list)
         if length / 2 != 0:
             count = 0
-            students_absent = input('Enter abesnt, seperate with comma: ')
-            students_absent = students_absent.split(',')
-            student_list = [student.lower() for student in student_list]
-            for absent in students_absent:
+            student_list = [student.lower() for student in students_list]
+            for absent in absent_list:
                 count += 1
                 for student in student_list:
                     if absent.lower() in student.lower():
@@ -86,11 +92,7 @@ class PairGenerator:
                 shuffled_pairs[-1] = shuffled_pairs[-1] + last_pick
             elif assignemt_input.lower() == '2':
                 pairs = self.pairs([student.title() for student in student_list])
-
-        else:
-            pairs = self.pairs(student_list)
-
-        self.recent_check(pairs)
+        return pairs
 
     def recent_check(self, pairs):
         """Check recent pair list."""
